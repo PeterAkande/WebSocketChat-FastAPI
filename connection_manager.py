@@ -90,7 +90,7 @@ class ConnectionManager:
 
         for connection in users_ws_connections:
             is_sent, sent_message_response_info = await self.send_message_to_ws_connection(
-                message=f"{message} from room: {room_id}", ws_connection=connection)
+                message=f"Room {room_id} --> {message}", ws_connection=connection)
 
             # It can be chosen to remove the connection from the self.user_connections if is_sent is False.
 
