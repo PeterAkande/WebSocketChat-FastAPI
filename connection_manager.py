@@ -12,6 +12,16 @@ class ConnectionManager:
     """
 
     def __init__(self):
+        """
+        self.connections would be an in memory db of the users connected to a DB.
+        It would function with an forward index like structure.
+
+        Something like:
+        {
+            room_id: {user1, user2, user3},
+            room_id_1: {user1, user3}
+        }
+        """
         self.connections: Dict[str, Set[str]] = {}  # The Room and the set of users connected
         self.user_connections: Dict[str, WebSocket] = {}  # the user connections
 

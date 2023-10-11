@@ -13,11 +13,6 @@ connection_manager = ConnectionManager()
 
 app = FastAPI()
 
-# this would be the In memory Db. It would house all the websocket connections in soma kind of inverted index
-# Structure.
-# So it would be like
-rooms_hash_map: Dict[str, Set] = {}
-
 
 @app.get("/")
 async def get():
