@@ -1,0 +1,117 @@
+var ws = null
+var userId = null
+
+function connectToWS(event) {
+
+    var userIdField = document.getElementById("userIdText")
+    var connectionInfoSpan = document.getElementById("connectionInfo")
+
+    if (userIdField.value.length == 0) {
+        // The String is empty
+        connectionInfoSpan.innerHTML = "Please input User Unique id"
+        connectionInfoSpan.style.color = "red"
+
+        event.preventDefault()
+        return;
+    }
+
+    userId = userIdField.value
+    connectionInfoSpan.innerHTML = "Connection Made Successfully!"
+    connectionInfoSpan.style.color = "green"
+
+    //The user Id was gotten
+    //Initiate the connection
+    let wsUrl = "ws://localhost:8000/ws/" + userId
+    ws = new WebSocket(wsUrl);
+
+    ws.onmessage = function (event) {
+        var messages = document.getElementById('messages')
+        var message = document.createElement('li')
+        var content = document.createTextNode(event.data)
+        message.appendChild(content)
+        messages.appendChild(message)
+    };
+    event.preventDefault()
+}
+
+async function listenToRoom(event) {
+    var roomIdField = document.getElementById("connectRoomIdText")
+    var connectRoomInfoSpan = document.getElementById("connectRoomInfo")
+
+    if (roomIdField.value.length == 0) {
+        connectRoomInfoSpan.innerHTML = "Please Enter the room Id"
+        event.preventDefault()
+        return;
+    }
+
+
+    if (userId == null) {
+        connectRoomInfoSpan.innerHTML = "User Id not Set"
+        event.preventDefault()
+        return;
+    }
+
+    //The whole data has now been gotten, Make the request now
+
+    response = await fetch("/register_to_room", {
+        method: "POST",
+        body: JSON.stringify({
+            user_id: userId,
+            room_id: roomIdField.value,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    }
+    )
+
+    if (!response.ok) {
+        connectRoomInfoSpan.innerHTML = "Error Joining Room"
+        event.preventDefault()
+        return;
+    }
+
+    res = await response.json()
+
+    connectRoomInfoSpan.innerHTML = "Room Joined Successfully!"
+    connectRoomInfoSpan.style.color = "green"
+    event.preventDefault()
+
+
+}
+function sendMessage(event) {
+    var input = document.getElementById("messageText")
+    var roomId = document.getElementById("roomIDMessageText")
+    var sendMessageInfo = document.getElementById("sendMessageInfo")
+
+
+    if (roomId.value.length == 0) {
+        sendMessageInfo.innerHTML = "Please Enter the room Id"
+        event.preventDefault()
+        return false;
+    }
+
+    if (input.value.length == 0) {
+        sendMessageInfo.innerHTML = "Please enter a valid Message"
+        event.preventDefault()
+        return false;
+    }
+
+
+    if (ws == null) {
+        sendMessageInfo.innerHTML = "No Connection Made"
+        event.preventDefault()
+        return false;
+    }
+
+    var message = {
+        room_id: roomId.value,
+        message: input.value,
+    }
+
+    ws.send(JSON.stringify(message))
+
+    input.value = ''
+    sendMessageInfo.innerHTML = ""
+    event.preventDefault()
+}
