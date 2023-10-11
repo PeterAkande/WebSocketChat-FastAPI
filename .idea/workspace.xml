@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a2e602f-319c-4c46-ad6d-fb9ca91997dd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/FastApiWebSocket.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connection_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/register_to_room_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
+    <list default="true" id="3a2e602f-319c-4c46-ad6d-fb9ca91997dd" name="Changes" comment="init: socket chat, fist iteration">
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -87,6 +84,15 @@
       <option name="presentableId" value="Default" />
       <updated>1696926283686</updated>
     </task>
+    <task id="LOCAL-00001" summary="init: socket chat, fist iteration">
+      <option name="closed" value="true" />
+      <created>1696997060890</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696997060890</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,5 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="init: socket chat, fist iteration" />
+    <option name="LAST_COMMIT_MESSAGE" value="init: socket chat, fist iteration" />
   </component>
 </project>
