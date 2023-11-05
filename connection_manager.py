@@ -145,11 +145,6 @@ class ConnectionManager:
                 await self._consume_events(message=message)
 
     async def send_message_to_room(self, message: MessageToRoomModel):
-        """
-        Messages in this Program are Texts.
-        the room id is the channel of the room
-        # You just publish to the room
-        """
 
         room_connections = self.connections.get(message.room_id, {})
 
