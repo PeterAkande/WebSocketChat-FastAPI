@@ -7,11 +7,27 @@ from fastapi.exceptions import HTTPException
 
 from connection_manager import ConnectionManager
 from models.register_to_room_model import RegisterToRoom
+from models.message_to_room_model import MessageToRoomModel
 
 number_of_socket_connections = 0
 connection_manager = ConnectionManager()
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def startup():
+    print("Conneting to redis")
+    await connection_manager.connect_broadcaster()
+    print("Connected to redis")
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    print("Disconnecting from redis")
+    await connection_manager.disconnect_broadcaster()
+    print("Disconnected from redis")
+
 
 
 @app.get("/")
@@ -52,14 +68,18 @@ async def websocket_endpoint(user_id: str, websocket: WebSocket):
             data = await websocket.receive_json()
 
             room_id = data["room_id"]
-            message = data["message"]
+            message_sent = data["message"]
+            user_id = data["user_id"]
 
-            await connection_manager.send_message_to_room(message=message, room_id=room_id)
+            message = MessageToRoomModel(message=message_sent, room_id=room_id, user_id=user_id)
+
+            await connection_manager.send_message_to_room(message=message)
     except WebSocketDisconnect:
         # Remove the user from the connection stack
         connection_manager.remove_user_connection(user_id=user_id)
 
     except WebSocketException as e:
         traceback.print_exc()
+        #
 
         print("An error occurred and i dont know the details")

@@ -23,7 +23,7 @@
             <!-- Send message-->
             <label>Message: <input type="text" id="messageText" autocomplete="off"/></label>
             <br>
-            <label>Room ID: <input type="text", id="roomIDMessageText" autocomplete="off"/></label>
+            <label>Room ID: <input type="text" id="roomIDMessageText" autocomplete="off"/></label>
             <br>
             <span id="sendMessageInfo" style="color: red"></span>
             <br>
@@ -88,7 +88,7 @@
 
                 //The whole data has now been gotten, Make the request now
 
-                response = await fetch("/register_to_room", {
+                response = await fetch("/register_to_room/", {
                     method: "POST",
                     body: JSON.stringify({
                         user_id: userId,
@@ -142,6 +142,7 @@
                 var message = {
                     room_id: roomId.value,
                     message: input.value,
+                    user_id: userId,
                 }
 
                 ws.send(JSON.stringify(message))
