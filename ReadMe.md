@@ -4,6 +4,9 @@ A FastAPI Backend Service that simulates the Websocket needs of a chat app that 
 - Users being able to Exchange messages with one another
 - The concept of rooms or group chats
 
+This uses an in memory List to keep track of Websocket connections. 
+To check the version that uses redis PUB/SUB, check the [redis_db_branch](https://github.com/PeterAkande/WebSocketChat-FastAPI/tree/redis_backend)
+
 
 
 #### Demo
